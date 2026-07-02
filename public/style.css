@@ -1750,3 +1750,20 @@ footer {
     footer { padding: 20px 12px; }
     .footer-summary-context p { font-size: 12px; }
 }
+.footer-divider {
+    width: 80%;
+    max-width: 800px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 25px auto;
+}
+
+.footer-bottom {
+    margin-top: 10px;
+}
+
+.footer-bottom p {
+    font-size: 13px;
+    opacity: 0.85;
+    margin: 5px 0;
+}
