@@ -1,0 +1,82 @@
+{
+  "categoryToEmail": {
+    "roads": {
+      "name": "Public Works Department (Roads)",
+      "state_emails": {
+        "delhi": "pwd-delhi@delhigovt.nic.in",
+        "maharashtra": "pwd-maharashtra@maharashtra.gov.in",
+        "karnataka": "pwd-karnataka@karnataka.gov.in",
+        "default": "roads-complaint@state.gov.in"
+      }
+    },
+    "water": {
+      "name": "Water Supply Department",
+      "state_emails": {
+        "delhi": "jal-board@delhi.gov.in",
+        "maharashtra": "water-supply@maharashtra.gov.in",
+        "karnataka": "water-resources@karnataka.gov.in",
+        "default": "water-complaint@state.gov.in"
+      }
+    },
+    "electricity": {
+      "name": "Electricity Department",
+      "state_emails": {
+        "delhi": "support@delhidiscom.org",
+        "maharashtra": "complaint@mahagenco.in",
+        "karnataka": "grievance@bescom.co.in",
+        "default": "electricity-complaint@state.gov.in"
+      }
+    },
+    "sewage": {
+      "name": "Sewage & Drainage",
+      "state_emails": {
+        "delhi": "dmc-sewage@delhigovt.nic.in",
+        "maharashtra": "sewage@municipal.maharashtra.gov.in",
+        "karnataka": "drainage@bengaluru.gov.in",
+        "default": "sewage-complaint@state.gov.in"
+      }
+    },
+    "waste": {
+      "name": "Solid Waste Management",
+      "state_emails": {
+        "delhi": "swm@delhigovt.nic.in",
+        "maharashtra": "waste-mgmt@maharashtra.gov.in",
+        "karnataka": "waste@bengaluru.gov.in",
+        "default": "waste-complaint@state.gov.in"
+      }
+    },
+    "food_safety": {
+      "name": "Food Safety Authority (FSSAI)",
+      "state_emails": {
+        "delhi": "delhi@fssai.gov.in",
+        "maharashtra": "maharashtra@fssai.gov.in",
+        "karnataka": "karnataka@fssai.gov.in",
+        "default": "complaint@fssai.gov.in"
+      }
+    },
+    "traffic": {
+      "name": "Traffic Police",
+      "state_emails": {
+        "delhi": "traffic-delhi@delhipolice.gov.in",
+        "maharashtra": "traffic@maharashtra.police.gov.in",
+        "karnataka": "traffic@bengaluru.police.gov.in",
+        "default": "traffic-complaint@state.gov.in"
+      }
+    },
+    "corruption": {
+      "name": "Anti-Corruption Bureau",
+      "state_emails": {
+        "delhi": "acb-delhi@delhigovt.nic.in",
+        "maharashtra": "acb@maharashtra.gov.in",
+        "karnataka": "acb@karnataka.gov.in",
+        "default": "corruption-complaint@state.gov.in"
+      }
+    },
+    "default": {
+      "name": "General Grievance Portal",
+      "state_emails": {
+        "default": "grievance@cpgrams.gov.in"
+      }
+    }
+  }
+}
