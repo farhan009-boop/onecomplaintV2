@@ -19,7 +19,9 @@ const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 });
 
-// ---------------- SCHEMA ----------------
+// ============================================================================
+// SCHEMA FOR COMPLAINT ANALYSIS
+// ============================================================================
 const complaintSchema = {
   type: Type.OBJECT,
   properties: {
@@ -44,7 +46,9 @@ const complaintSchema = {
   ],
 };
 
-// ---------------- ROUTE 1 ----------------
+// ============================================================================
+// ROUTE 1: /analyze - COMPLAINT ANALYSIS
+// ============================================================================
 app.post("/analyze", async (req, res) => {
   console.log("Analyze route hit");
 
@@ -106,10 +110,18 @@ Complaint: ${complaint}
   }
 });
 
-// ---------------- ROUTE 2 ----------------
+// ============================================================================
+// ROUTE 2: /generate-letter - GENERATE COMPLAINT LETTER [FIXED]
+// ============================================================================
 app.post("/generate-letter", async (req, res) => {
+  console.log("Generate letter route hit");
+  
   try {
     const data = req.body;
+
+    if (!data.problem) {
+      return res.status(400).json({ error: "Problem is required" });
+    }
 
     const prompt = `
 Create a formal complaint letter.
@@ -127,26 +139,43 @@ Return only the letter.
       contents: prompt,
     });
 
+    // FIX: Properly extract letter text from response
     const letter =
       response?.text ||
       response?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-    await db.collection("complaints").add({
-      uid: data.uid || "",
-      name: data.name || "",
-      email: data.email || "",
-      phone: data.phone || "",
-      address: data.address || "",
-      city: data.city,
-      pincode: data.pincode,
-      problem: data.problem,
-      authority: data.authority,
-      department: data.department,
-      area: data.area,
-      letter: letter,
-      status: "Pending",
-      createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    });
+    // FIX: Check if letter is undefined or empty
+    if (!letter || letter === undefined || letter.trim() === "") {
+      console.error("Letter content is undefined or empty");
+      return res.status(500).json({ 
+        error: "Failed to generate letter content. Please try again." 
+      });
+    }
+
+    // Save to Firestore
+    try {
+      await db.collection("complaints").add({
+        uid: data.uid || "",
+        name: data.name || "",
+        email: data.email || "",
+        phone: data.phone || "",
+        address: data.address || "",
+        city: data.city,
+        pincode: data.pincode,
+        problem: data.problem,
+        authority: data.authority,
+        department: data.department,
+        area: data.area,
+        letter: letter,
+        status: "Pending",
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+      });
+      console.log("Letter saved to Firestore successfully");
+    } catch (dbError) {
+      console.warn("Firestore save warning (non-fatal):", dbError.message);
+      // Don't fail the request if Firestore save fails
+      // The letter is still generated, just not saved to DB
+    }
 
     res.json({ letter });
   } catch (error) {
@@ -158,7 +187,9 @@ Return only the letter.
   }
 });
 
-// ---------------- TEST ROUTE ----------------
+// ============================================================================
+// ROUTE 3: /test-firestore - TEST FIRESTORE CONNECTION
+// ============================================================================
 app.get("/test-firestore", async (req, res) => {
   try {
     const docRef = await db.collection("test").add({
@@ -176,7 +207,9 @@ app.get("/test-firestore", async (req, res) => {
   }
 });
 
-// ---------------- SERVER ----------------
+// ============================================================================
+// SERVER START
+// ============================================================================
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
