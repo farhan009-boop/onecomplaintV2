@@ -1,22 +1,21 @@
 {
   "name": "ai-complaint-assistant",
   "version": "1.0.0",
-  "description": "AI-Powered Civic Grievance Redressal System",
-  "main": "server.js",
+  "description": "",
+  "main": "index.js",
   "scripts": {
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["complaint", "civic", "AI", "government"],
-  "author": "Your Name",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
     "@google/genai": "^2.8.0",
-    "axios": "^1.6.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "node-cache": "^5.1.2"
+    "firebase-admin": "^13.4.0"
   }
 }
